@@ -1,7 +1,7 @@
 Bootstrap: docker
 From: ubuntu:xenial
 
-#Singularity file used to create neuroimage.img, contains:
+#Singularity file used to create  khanlab/neuroglia.img, contains:
 # anaconda2-4.2.0(python 2.7.12)
 # nipype 0.3.1
 # afni Jun 12 2017
@@ -14,6 +14,7 @@ From: ubuntu:xenial
 # dcm2niix 1.0.20170724 
 # elastix 4.801
 # dcmtk 3.6.2
+# slicer 4.7 2017-09-30
 # MRtrix3 3.0 rc2
 # ashs 20170223
 # minc 1.9.15
@@ -28,7 +29,7 @@ From: ubuntu:xenial
 # if missing:  libjpeg.so.62, run apt-get install libjpeg62
 
 #create image
-#rm neuroimage.img && singularity create  --size 20000 neuroimage.img && sudo singularity bootstrap neuroimage.img /mnt/hgfs/Dropbox/Robarts/neuroimage_singularity/Singularity.sh
+#rm neuroglia.img && singularity create  --size 22000 neuroglia.img && sudo singularity bootstrap neuroglia.img /mnt/hgfs/Dropbox/Robarts/neuroglia_singularity/Singularity.sh
 
 #########
 %setup
@@ -50,6 +51,7 @@ bash 16.install_ants_by_binary.sh /opt
 bash 17.install_dcm2niix_by_binary.sh /opt
 bash 18.install_elastix_by_binary.sh /opt
 bash 19.install_dcmtk_by_binary.sh /opt
+bash 20.install_slicer_by_binary.sh /opt
 bash 21.install_MRtrix3_by_source_sudo.sh /opt
 bash 22.install_ashs_by_binary.sh /opt
 bash 23.install_heudiconv_by_source.sh /opt
@@ -64,69 +66,73 @@ mkdir -p /opt/scripts
 #########
 %environment
 #########
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 #anaconda2
-PATH=/opt/anaconda2/bin/:$PATH
+export PATH=/opt/anaconda2/bin/:$PATH
 
 #c3d
-PATH=/opt/c3d/bin:$PATH
-LD_LIBRARY_PATH=/opt/c3d/lib/c3d_gui-1.1.0:$LD_LIBRARY_PATH
+export PATH=/opt/c3d/bin:$PATH
+export LD_LIBRARY_PATH=/opt/c3d/lib/c3d_gui-1.1.0:$LD_LIBRARY_PATH
 
 #itksnap
-PATH=/opt/itksnap/bin:$PATH
-LD_LIBRARY_PATH=/opt/itksnap/lib/snap-3.6.0:$LD_LIBRARY_PATH
+export PATH=/opt/itksnap/bin:$PATH
+export LD_LIBRARY_PATH=/opt/itksnap/lib/snap-3.6.0:$LD_LIBRARY_PATH
 
-#dcmtk #note: dicom_retrieve.py use dcm4che's getscu. So, put dcm4che's PATH before dcmtk's PATH
-PATH=/opt/dcmtk/bin:$PATH
-
+#dicom_retrieve.py use dcm4che's getscu. So, put dcm4che's PATH before dcmtk's PATH
 #dcm4che
-PATH=/opt/dcm4che-3.3.8/bin:$PATH
+export PATH=/opt/dcm4che-3.3.8/bin:$PATH
 
 #freesurfer
-PATH=/opt/freesurfer/bin:$PATH
-FREESURFER_HOME=/opt/freesurfer
-FSFAST_HOME=/opt/freesurfer/fsfast
-FSF_OUTPUT_FORMAT=nii.gz
-SUBJECTS_DIR=/opt/freesurfer/subjects
-MNI_DIR=/opt/fresurfer/mni
-MINC_BIN_DIR=/opt/freesurfer/mni/bin
-MINC_LIB_DIR=/opt/freesurfer/mni/lib
+export PATH=/opt/freesurfer/bin:$PATH
+export FREESURFER_HOME=/opt/freesurfer
+export FSFAST_HOME=/opt/freesurfer/fsfast
+export FSF_OUTPUT_FORMAT=nii.gz
+export SUBJECTS_DIR=/opt/freesurfer/subjects
+export MNI_DIR=/opt/fresurfer/mni
+export MINC_BIN_DIR=/opt/freesurfer/mni/bin
+export MINC_LIB_DIR=/opt/freesurfer/mni/lib
 
 #ants
-PATH=/opt/ants:$PATH
-ANTSPATH=/opt/ants
+export PATH=/opt/ants:$PATH
+export ANTSPATH=/opt/ants
 
 #dcm2niix
-PATH=/opt/mricrogl_lx:$PATH
+export PATH=/opt/mricrogl_lx:$PATH
 
 #elastix
-PATH=/opt/elastix:$PATH
-LD_LIBRARY_PATH=/opt/elastix:$LD_LIBRARY_PATH
+export PATH=/opt/elastix:$PATH
+export LD_LIBRARY_PATH=/opt/elastix:$LD_LIBRARY_PATH
+
+#dcmtk
+export PATH=/opt/dcmtk/bin:$PATH
+
+#slicer
+export PATH=/opt/slicer:$PATH
 
 #MRtrix3
-PATH=/opt/mrtrix3/bin:$PATH
+export PATH=/opt/mrtrix3/bin:$PATH
 
 #ashs
-PATH=/opt/ashs/ashs-fastashs/bin:$PATH
+export PATH=/opt/ashs/ashs-fastashs/bin:$PATH
 
 #minc
-MINC_TOOLKIT=/opt/minc/1.9.15
-MINC_TOOLKIT_VERSION="1.9.15-20170529"
-PATH=/opt/minc/1.9.15/bin:/opt/minc/1.9.15/pipeline:${PATH}
-PERL5LIB=/opt/minc/1.9.15/perl:/opt/minc/1.9.15/pipeline:${PERL5LIB}
-LD_LIBRARY_PATH=/opt/minc/1.9.15/lib:/opt/minc/1.9.15/lib/InsightToolkit:${LD_LIBRARY_PATH}
-MNI_DATAPATH=/opt/minc/1.9.15/share
-MINC_FORCE_V2=1
-MINC_COMPRESS=4
-VOLUME_CACHE_THRESHOLD=-1
-MANPATH=/opt/minc/1.9.15/man:${MANPATH}
+export MINC_TOOLKIT=/opt/minc/1.9.15
+export MINC_TOOLKIT_VERSION="1.9.15-20170529"
+export PATH=/opt/minc/1.9.15/bin:/opt/minc/1.9.15/pipeline:${PATH}
+export PERL5LIB=/opt/minc/1.9.15/perl:/opt/minc/1.9.15/pipeline:${PERL5LIB}
+export LD_LIBRARY_PATH=/opt/minc/1.9.15/lib:/opt/minc/1.9.15/lib/InsightToolkit:${LD_LIBRARY_PATH}
+export MNI_DATAPATH=/opt/minc/1.9.15/share
+export MINC_FORCE_V2=1
+export MINC_COMPRESS=4
+export VOLUME_CACHE_THRESHOLD=-1
+export MANPATH=/opt/minc/1.9.15/man:${MANPATH}
 
 #heudiconv
-PATH=/opt/heudiconv:$PATH
+export PATH=/opt/heudiconv:$PATH
 
 #scripts
-PATH=/opt/scripts:$PATH
+export PATH=/opt/scripts:$PATH
 
 #########
 %files

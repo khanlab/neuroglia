@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_FILE=~/test/neuroimage/neuroimage.img
+IMAGE_FILE=~/neuroglia/neuroglia.img
 
 echo -n "test anaconda install: "
 singularity exec $IMAGE_FILE conda -h &> /dev/null
@@ -10,7 +10,7 @@ else
     echo 'FAIL.'
 fi
 
-echo -n "testing afni install"
+echo -n "testing afni install: "
 singularity exec $IMAGE_FILE afni --help &> /dev/null
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
@@ -27,7 +27,7 @@ else
 fi
 
 #test minc, NOTE: mincinfo -h, $? is 1 which will report "ABORT: Aborting with RETVAL=255"
-echo -n "testing mincinfo: "
+echo -n "testing minc install: "
 singularity exec $IMAGE_FILE mincinfo -h &>/dev/null
 if [ $? -eq 1 ]; then
 	echo "SUCCESS"
@@ -59,7 +59,8 @@ singularity exec $IMAGE_FILE getscu -h &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "SUCCESS"
 else
-    echo "FAILED"
+    echo "FAIL
+    "
 fi
 
 #test freesurfer
@@ -108,6 +109,15 @@ else
 fi
 
 #test installation
+echo -n "testing slicer install: "
+singularity exec $IMAGE_FILE Slicer -h  >/dev/null
+if [ $? -eq 0 ]; then
+	echo 'SUCCESS'
+else
+    echo 'FAIL.'
+fi
+
+#test installation
 echo -n "testing MRtrix3 install: "
 singularity exec $IMAGE_FILE mrview -h &>/dev/null
 if [ $? -eq 0 ]; then
@@ -144,7 +154,7 @@ else
 fi
 
 ## test dicom_retrieve
-singularity exec -B /mnt/hgfs/data:data $IMAGE_FILE dicom_retrieve.py /data/7T_BIDS_patientID_list.txt /data/output/dicom/ UWO_USERNAME UWO_PASSWORD
+#singularity exec -B /mnt/hgfs/data:data $IMAGE_FILE dicom_retrieve.py /data/7T_BIDS_patientID_list.txt /data/output/dicom/ UWO_USERNAME UWO_PASSWORD
 
 #test heudiconv
 #singularity exec -B /mnt/hgfs/data:data $IMAGE_FILE heudiconv -b -d /data/7T_BIDS/dicoms/{subject}/*.IMA -s 001 -f /data/7T_BIDS/7T_TOPSY_BIDS_heuristic.py -c dcm2niix -b -o /data/output
