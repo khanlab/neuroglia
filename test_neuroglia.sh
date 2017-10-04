@@ -2,12 +2,12 @@
 
 IMAGE_FILE=~/neuroglia/neuroglia.img
 
-echo -n "test anaconda install: "
+echo -n "testing anaconda install: "
 singularity exec $IMAGE_FILE conda -h &> /dev/null
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 echo -n "testing afni install: "
@@ -15,15 +15,15 @@ singularity exec $IMAGE_FILE afni --help &> /dev/null
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
-echo -n "testing fsl install"
+echo -n "testing fsl install: "
 singularity exec $IMAGE_FILE fsl5.0-bet2 -h &> /dev/null  #fsl5.0-fsl -h always show a gui, use fsl5.0-bet2 instead.
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test minc, NOTE: mincinfo -h, $? is 1 which will report "ABORT: Aborting with RETVAL=255"
@@ -36,12 +36,12 @@ else
 fi
 
 #test installation
-echo -n "test c3d install: "
+echo -n "testing c3d install: "
 singularity exec $IMAGE_FILE c3d -h &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "SUCCESS"
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test itksnap, NOTE: itksnap -h, $? is 1 which will report "ABORT: Aborting with RETVAL=255"
@@ -69,7 +69,7 @@ singularity exec $IMAGE_FILE freesurfer -h &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "SUCCESS"
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test installation
@@ -78,7 +78,7 @@ singularity exec $IMAGE_FILE ants.sh -h &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "SUCCESS"
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test installation
@@ -87,7 +87,7 @@ singularity exec $IMAGE_FILE dcm2niix -h &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "SUCCESS"
 else
-    echo "FAIL."
+    echo "FAIL"
 fi
 
 #test installation
@@ -96,7 +96,7 @@ singularity exec $IMAGE_FILE elastix -h &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "SUCCESS"
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test installation
@@ -105,7 +105,7 @@ singularity exec $IMAGE_FILE dcmdump -h &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "SUCCESS"
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test installation
@@ -114,16 +114,16 @@ singularity exec $IMAGE_FILE Slicer -h  >/dev/null
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test installation
 echo -n "testing MRtrix3 install: "
 singularity exec $IMAGE_FILE mrview -h &>/dev/null
 if [ $? -eq 0 ]; then
- 	echo 'SUCCESS.'
+ 	echo 'SUCCESS'
 else
-     echo 'FAIL.'
+     echo 'FAIL'
 fi
 
 #test installation
@@ -132,7 +132,7 @@ singularity exec $IMAGE_FILE ashs_main.sh -h  &>/dev/null
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test installation
@@ -141,16 +141,16 @@ singularity exec $IMAGE_FILE heudiconv -h  >/dev/null
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 #test installation
-echo -n "testing ashs install: "
+echo -n "testing bids-validator install: "
 singularity exec $IMAGE_FILE bids-validator -h  >/dev/null
 if [ $? -eq 0 ]; then
 	echo 'SUCCESS'
 else
-    echo 'FAIL.'
+    echo 'FAIL'
 fi
 
 ## test dicom_retrieve
