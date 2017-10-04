@@ -2,6 +2,8 @@
 
 apt-get update
 
+apt-get install -y --no-install-recommends apt-utils
+
 #basic
 apt-get install -y sudo wget curl git dos2unix tree zip unzip
 

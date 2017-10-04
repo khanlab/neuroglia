@@ -1,3 +1,6 @@
+How to download neuroglia.img?
+	singularity pull shub://khanlab/neuroglia:master
+
 What package in the image?
   anaconda2-4.2.0(python 2.7.12)
   nipype 0.3.1
@@ -21,6 +24,8 @@ What package in the image?
   
 How to use the tools in the singularity image?
 
+  step 0. install Linux(ubuntu/debian,CentOS,mint,...)
+  
   step 1. install singularity:
 	sudo bash 02.install_singularity_by_source_sudo.sh /opt
 	or 
