@@ -137,5 +137,5 @@ export PATH=/opt/scripts:$PATH
 #########
 %files
 #########
-/mnt/hgfs/Dropbox/Robarts/7T_BIDS/dicom_retrieve.py /opt/scripts/dicom_retrieve.py
-/mnt/hgfs/Dropbox/Robarts/7T_BIDS/7T_TOPSY_BIDS_heuristic.py /opt/scripts/7T_TOPSY_BIDS_heuristic.py
+./files_scripts/dicom_retrieve.py /opt/scripts/dicom_retrieve.py
+./files_scripts/7T_TOPSY_BIDS_heuristic.py /opt/scripts/7T_TOPSY_BIDS_heuristic.py
