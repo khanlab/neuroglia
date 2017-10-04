@@ -29,12 +29,12 @@ From: ubuntu:xenial
 # if missing:  libjpeg.so.62, run apt-get install libjpeg62
 
 #create image
-#rm neuroglia.img && singularity create  --size 22000 neuroglia.img && sudo singularity bootstrap neuroglia.img /mnt/hgfs/Dropbox/Robarts/neuroglia_singularity/Singularity.sh
+#rm ~/neuroglia/neuroglia.img && singularity create  --size 20000 ~/neuroglia/neuroglia.img && sudo singularity bootstrap ~/neuroglia/neuroglia.img Singularity
 
 #########
 %setup
 #########
-cp /mnt/hgfs/Dropbox/linux_install_scripts/*.sh $SINGULARITY_ROOTFS
+cp ./install_scripts/*.sh $SINGULARITY_ROOTFS
 
 #########
 %post
