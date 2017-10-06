@@ -3,6 +3,7 @@ NAME=neuroglia
 VERSION = 0.0.1
 
 DOCKER_NAME=$(ORG)/$(NAME):$(VERSION)
+DOCKER_LATEST=$(ORG)/$(NAME):latest
 SINGULARITY_NAME=$(ORG)_$(NAME)_$(VERSION)
 SIZE=10000
 
@@ -16,7 +17,7 @@ singularity_build:
 	singularity create  --force --size $(SIZE) $(SINGULARITY_NAME).img 
 	sudo singularity bootstrap  $(SINGULARITY_NAME).img Singularity
 
-tag_latest:
+docker_tag_latest:
 	docker tag $(DOCKER_NAME) $(DOCKER_LATEST)
 
 docker_push:
