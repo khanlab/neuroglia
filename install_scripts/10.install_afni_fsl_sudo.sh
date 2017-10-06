@@ -23,6 +23,25 @@ sudo apt-key adv --recv-keys --keyserver pgp.mit.edu 2649A5A9
 sudo apt-get update
 sudo apt-get install -y fsl #this will install atalas too
 
+
+if [ -e $HOME/.profile ]; then #ubuntu
+	PROFILE=$HOME/.profile
+elif [ -e $HOME/.bash_profile ]; then #centos
+	PROFILE=$HOME/.bash_profile
+else
+    exit 0
+fi
+
+#check if PATH already exist in $PROFILE
+if grep -q "source /etc/fsl/5.0/fsl.sh"  $PROFILE #return 0 if exist
+then 
+	echo "source /etc/fsl/5.0/fsl.sh" in $PROFILE already.
+else
+	echo "#FSL set-up:" >> $PROFILE
+	echo "source /etc/fsl/5.0/fsl.sh" >> $PROFILE
+fi
+
+
 #test installation
 echo "testing afni install"
 afni --help > /dev/null

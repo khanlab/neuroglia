@@ -39,6 +39,8 @@ cp ./install_scripts/*.sh $SINGULARITY_ROOTFS
 #########
 %post
 #########
+
+export DEBIAN_FRONTEND=noninteractive
 bash 00.install_basics_sudo.sh
 bash 03.install_anaconda2_nipype_dcmstack_by_binary.sh /opt
 bash 10.install_afni_fsl_sudo.sh
@@ -56,6 +58,8 @@ bash 21.install_MRtrix3_by_source_sudo.sh /opt
 bash 22.install_ashs_by_binary.sh /opt
 bash 23.install_heudiconv_by_source.sh /opt
 bash 24.install_bids-validator_sudo.sh
+bash 25.install_niftyreg_by_source.sh /opt
+
 
 #remove all install scripts
 rm *.sh
@@ -65,8 +69,8 @@ mkdir -p /opt/scripts
 
 #########
 %environment
-#########
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+#export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 #anaconda2
 export PATH=/opt/anaconda2/bin/:$PATH
@@ -82,6 +86,10 @@ export LD_LIBRARY_PATH=/opt/itksnap/lib/snap-3.6.0:$LD_LIBRARY_PATH
 #dicom_retrieve.py use dcm4che's getscu. So, put dcm4che's PATH before dcmtk's PATH
 #dcm4che
 export PATH=/opt/dcm4che-3.3.8/bin:$PATH
+
+
+#fsl
+. /etc/fsl/fsl.sh
 
 #freesurfer
 export PATH=/opt/freesurfer/bin:$PATH
@@ -131,10 +139,13 @@ export MANPATH=/opt/minc/1.9.15/man:${MANPATH}
 #heudiconv
 export PATH=/opt/heudiconv:$PATH
 
+#niftyreg
+export LD_LIBRARY_PATH=/opt/niftyreg/lib:$LD_LIBRARY_PATH 
+export PATH=/opt/niftyreg/bin:$PATH
+
 #scripts
 export PATH=/opt/scripts:$PATH
 
-#########
 %files
 #########
 ./files_scripts/dicom_retrieve.py /opt/scripts/dicom_retrieve.py
