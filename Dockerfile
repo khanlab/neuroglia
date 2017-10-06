@@ -42,7 +42,15 @@ ENV PATH=/opt/dcm4che-3.3.8/bin:$PATH
 
 
 #fsl
-RUN . /etc/fsl/fsl.sh
+ENV FSLDIR=/usr/share/fsl/5.0
+ENV POSSUMDIR=$FSLDIR
+ENV PATH=/usr/lib/fsl/5.0:$PATH
+ENV FSLOUTPUTTYPE=NIFTI_GZ
+ENV FSLMULTIFILEQUIT=TRUE
+ENV FSLTCLSH=/usr/bin/tclsh
+ENV FSLWISH=/usr/bin/wish
+ENV FSLBROWSER=/etc/alternatives/x-www-browser
+ENV LD_LIBRARY_PATH=/usr/lib/fsl/5.0:${LD_LIBRARY_PATH}
 
 #freesurfer
 ENV PATH=/opt/freesurfer/bin:$PATH

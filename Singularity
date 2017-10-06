@@ -89,7 +89,16 @@ export PATH=/opt/dcm4che-3.3.8/bin:$PATH
 
 
 #fsl
-. /etc/fsl/fsl.sh
+export FSLDIR=/usr/share/fsl/5.0
+export POSSUMDIR=$FSLDIR
+export PATH=/usr/lib/fsl/5.0:$PATH
+export FSLOUTPUTTYPE=NIFTI_GZ
+export FSLMULTIFILEQUIT=TRUE
+export FSLTCLSH=/usr/bin/tclsh
+export FSLWISH=/usr/bin/wish
+export FSLBROWSER=/etc/alternatives/x-www-browser
+export LD_LIBRARY_PATH=/usr/lib/fsl/5.0:${LD_LIBRARY_PATH}
+
 
 #freesurfer
 export PATH=/opt/freesurfer/bin:$PATH
