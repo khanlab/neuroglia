@@ -1,5 +1,6 @@
 How to download neuroglia.img?
 	singularity pull shub://khanlab/neuroglia:master
+	singularity pull docker://khanlab/neuroglia:0.0.1
 
 What package in the image?
   anaconda2-4.2.0(python 2.7.12)
@@ -44,11 +45,11 @@ How to use the tools in the singularity image?
 			singularity exec /path/to/neuroglia.img afni &
 		
 		if you want to run elastix:
-			elastix  -f ~/Downloads/1_fixed.mha -m ~/Downloads/1_moving_by_translation_30.mha -out ~/Downloads/ttt -p ~/Downloads/elastix_pars_affine.txt 
+			singularity exec /path/to/neuroglia.img elastix  -f ~/Downloads/1_fixed.mha -m ~/Downloads/1_moving_by_translation_30.mha -out ~/Downloads/ttt -p ~/Downloads/elastix_pars_affine.txt 
 			(note: ~/Downloads is the host path. YES! you can see host $HOME when you exec a command in the container)
 			
 		if you want to run dicom_retrieve.py:
-			singularity exec -B /mnt/hgfs/data:data /path/to/neuroglia.img dicom_retrieve.py /data/7T_BIDS_patientID_list.txt /data/output/dicom/ UWO_USERNAME UWO_PASSWORD
+			singularity exec -B /mnt/hgfs/data:/data /path/to/neuroglia.img dicom_retrieve.py /data/7T_BIDS_patientID_list.txt /data/output/dicom/ UWO_USERNAME UWO_PASSWORD
 			note: 
 			-B(or --bind) will mapping your local(/mnt/hgfs/data) into the container(/data), thereafter, all operation with /data is actually /mnt/hgfs/data
 						

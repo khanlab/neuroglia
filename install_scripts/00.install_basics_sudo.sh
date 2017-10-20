@@ -10,6 +10,10 @@ apt-get install -y sudo wget curl git dos2unix tree zip unzip
 #
 apt-get install -y make cmake 
 
+#avoid interactive configureing tdata when installing afni when running 10.install_afni_fsl_sudo.sh
+apt-get install -y tzdata
+echo "America/New_York" | sudo tee /etc/timezone && sudo dpkg-reconfigure --frontend noninteractive tzdata
+
 #needed when install Anaconda2
 apt-get install -y bzip2
 
