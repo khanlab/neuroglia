@@ -1,5 +1,5 @@
 ORG=khanlab
-NAME=neuroglia
+NAME=neuroglia-vasst-dev
 VERSION = 0.0.1
 
 DOCKER_NAME=$(ORG)/$(NAME):$(VERSION)

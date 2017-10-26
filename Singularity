@@ -42,24 +42,25 @@ cp ./install_scripts/*.sh $SINGULARITY_ROOTFS
 
 export DEBIAN_FRONTEND=noninteractive
 bash 00.install_basics_sudo.sh
-bash 03.install_anaconda2_nipype_dcmstack_by_binary.sh /opt
+#bash 03.install_anaconda2_nipype_dcmstack_by_binary.sh /opt
 bash 10.install_afni_fsl_sudo.sh
-bash 11.install_minc_by_deb_sudo.sh /opt
+#bash 11.install_minc_by_deb_sudo.sh /opt
 bash 12.install_c3d_by_binary.sh /opt
-bash 13.install_itksnap_by_binary.sh /opt
-bash 14.install_dcm4che_ubuntu.sh /opt
-bash 15.install_freesurfer_by_source.sh /opt
-bash 16.install_ants_by_binary.sh /opt
+#bash 13.install_itksnap_by_binary.sh /opt
+#bash 14.install_dcm4che_ubuntu.sh /opt
+#bash 15.install_freesurfer_by_source.sh /opt
+#bash 16.install_ants_by_binary.sh /opt
 bash 17.install_dcm2niix_by_binary.sh /opt
-bash 18.install_elastix_by_binary.sh /opt
-bash 19.install_dcmtk_by_binary.sh /opt
-bash 20.install_slicer_by_binary.sh /opt
-bash 21.install_MRtrix3_by_source_sudo.sh /opt
-bash 22.install_ashs_by_binary.sh /opt
-bash 23.install_heudiconv_by_source.sh /opt
-bash 24.install_bids-validator_sudo.sh
+#bash 18.install_elastix_by_binary.sh /opt
+#bash 19.install_dcmtk_by_binary.sh /opt
+#bash 20.install_slicer_by_binary.sh /opt
+#bash 21.install_MRtrix3_by_source_sudo.sh /opt
+#bash 22.install_ashs_by_binary.sh /opt
+#bash 23.install_heudiconv_by_source.sh /opt
+#bash 24.install_bids-validator_sudo.sh
 bash 25.install_niftyreg_by_source.sh /opt
-
+bash 26.install_vasst_dev_by_source.sh /opt
+bash 27.install_vasst_dev_atlases_by_source.sh /opt
 
 #remove all install scripts
 rm *.sh
@@ -154,6 +155,19 @@ export PATH=/opt/niftyreg/bin:$PATH
 
 #scripts
 export PATH=/opt/scripts:$PATH
+
+#vasst-dev
+export VASST_DEV_HOME=/opt/vasst-dev
+export PIPELINE_ATLAS_DIR=/opt/atlases
+export PIPELINE_DIR=$VASST_DEV_HOME/pipeline
+export PIPELINE_TOOL_DIR=$VASST_DEV_HOME/tools
+MIAL_DEPENDS_DIR=$VASST_DEV_HOME/mial-depends
+MIAL_DEPENDS_LIBS=$VASST_DEV_HOME/mial-depends/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MIAL_DEPENDS_LIBS
+export PIPELINE_CFG_DIR=$PIPELINE_DIR/cfg
+export PATH=$PIPELINE_TOOL_DIR:$MIAL_DEPENDS_DIR:$PATH
+export MCRBINS=$VASST_DEV_HOME/mcr/v92
+for name in `ls -d $PIPELINE_DIR/*`; do  export PATH=$name:$PATH; done
 
 %files
 #########
