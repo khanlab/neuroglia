@@ -20,6 +20,8 @@ From: ubuntu:xenial
 # minc 1.9.15
 # heudiconv 0.3
 # bids-validator 0.23.3
+# DKE 2.6
+# DKE Fibertracking(July 23, 2015)
 # dicom_retrieve.py
 
 #note: install_afni_fsl_sudo.sh solves error message when run itksnap: LibGlu.so.1
@@ -29,18 +31,18 @@ From: ubuntu:xenial
 # if missing:  libjpeg.so.62, run apt-get install libjpeg62
 
 #create image
+#cd Dropbox/Robarts/neuroglia_singularity
 #rm ~/neuroglia/neuroglia.img && singularity create  --size 20000 ~/neuroglia/neuroglia.img && sudo singularity bootstrap ~/neuroglia/neuroglia.img Singularity
 
 #########
 %setup
 #########
 cp ./install_scripts/*.sh $SINGULARITY_ROOTFS
+ln -fs /usr/share/zoneinfo/US/Pacific-New /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 #########
 %post
 #########
-
-export DEBIAN_FRONTEND=noninteractive
 bash 00.install_basics_sudo.sh
 bash 03.install_anaconda2_nipype_dcmstack_by_binary.sh /opt
 bash 10.install_afni_fsl_sudo.sh
@@ -59,7 +61,7 @@ bash 22.install_ashs_by_binary.sh /opt
 bash 23.install_heudiconv_by_source.sh /opt
 bash 24.install_bids-validator_sudo.sh
 bash 25.install_niftyreg_by_source.sh /opt
-
+bash 26.install_dke_by_source.sh /opt
 
 #remove all install scripts
 rm *.sh
@@ -69,6 +71,9 @@ mkdir -p /opt/scripts
 
 #########
 %environment
+
+#told apt-get to skip any interactive steps
+export DEBIAN_FRONTEND=noninteractive
 
 #export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -151,6 +156,14 @@ export PATH=/opt/heudiconv:$PATH
 #niftyreg
 export LD_LIBRARY_PATH=/opt/niftyreg/lib:$LD_LIBRARY_PATH 
 export PATH=/opt/niftyreg/bin:$PATH
+
+#Matlab 2012a MCR, needed by Diffusional Kurtosis Imaging
+export LD_LIBRARY_PATH=/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717/runtime/glnxa64:/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717/bin/glnxa64:/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717/sys/os/glnxa64:/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717/sys/java/jre/glnxa64/jre/lib/amd64/server:/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717/sys/java/jre/glnxa64/jre/lib/amd64:$LD_LIBRARY_PATH
+export XAPPLRESDIR=/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717/X11/app-defaults
+
+#dke
+#dke Fiber Tractography
+export PATH=/opt/dke:$PATH
 
 #scripts
 export PATH=/opt/scripts:$PATH

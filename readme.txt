@@ -21,7 +21,12 @@ What package in the image?
   minc 1.9.15
   heudiconv 0.3
   bids-validator 0.23.3
+  DKE 2.6
+  DKE Fibertracking(July 23, 2015)
   dicom_retrieve.py
+  
+For Diffusional Kurtosis Imaging:
+	<deployedMCRroot> is "/usr/local/MATLAB/MATLAB_Compiler_Runtime/v717"
   
 How to use the tools in the singularity image?
 
