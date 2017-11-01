@@ -8,17 +8,15 @@ else
 	exit -1
 fi
 
-if [ -n $SINGULARITY_BINDS ]
+if [ -n $SINGULARITY_OPTS ]
 then
-	echo "Using binds: $SINGULARITY_BINDS"
-	BINDS="-B $SINGULARITY_BINDS"
+	echo "Using opts: $SINGULARITY_OPTS"
 else
-	echo "Warning: SINGULARITY_BINDS not defined!"
-	BINDS=""
+	echo "Warning: SINGULARITY_OPTS not defined!"
 fi
 
 
 
 
 
-singularity exec $BINDS $SINGULARITY_IMG $@
+singularity exec $SINGULARITY_OPTS $SINGULARITY_IMG $@

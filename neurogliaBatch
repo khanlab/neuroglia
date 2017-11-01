@@ -11,16 +11,6 @@ else
 	exit -1
 fi
 
-if [ -n $SINGULARITY_BINDS ]
-then
-	echo "Using binds: $SINGULARITY_BINDS"
-	BINDS="-B $SINGULARITY_BINDS"
-else
-	echo "Warning: SINGULARITY_BINDS not defined!"
-	BINDS=""
-fi
-
-
 if [ "$#" -lt 2 ]
 then 
   echo "Usage: $0 <name of pipeline script>  <subjid/list> <additional arguments ... if any> "
@@ -81,7 +71,7 @@ out=$job_dir/$name.out
 
 echo "#!/bin/bash" > $job
 echo cd `pwd` >> $job
-echo singularity exec -B /project:/project $SINGULARITY_DEFAULT  $pipeline_script $add_args $subj >> $job
+echo singularity exec $SINGULARITY_OPTS $SINGULARITY_DEFAULT  $pipeline_script $add_args $subj >> $job
 
  echo sbatch -J $name  -D `pwd` --time=24:00:00 --cpus-per-task=8 --ntasks=1 --mem=32000 --account=rrg-akhanf --output=$out $job 
  sbatch -J $name  -D `pwd` --time=24:00:00 --cpus-per-task=8 --ntasks=1 --mem=32000 --account=rrg-akhanf --output=$out $job 
