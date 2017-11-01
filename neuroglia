@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ -n $SINGULARITY_IMG ]
+then
+	echo "Using env: $SINGULARITY_IMG"
+else
+	echo "SINGULARITY_IMG not defined! exiting..."
+	exit -1
+fi
+
+if [ -n $SINGULARITY_BINDS ]
+then
+	echo "Using binds: $SINGULARITY_BINDS"
+	BINDS="-B $SINGULARITY_BINDS"
+else
+	echo "Warning: SINGULARITY_BINDS not defined!"
+	BINDS=""
+fi
+
+
+
+
+
+singularity exec $BINDS $SINGULARITY_IMG $@
