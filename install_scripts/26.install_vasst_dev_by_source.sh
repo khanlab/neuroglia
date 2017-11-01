@@ -13,6 +13,12 @@ mkdir -p $INSTALL
 
 git clone https://github.com/akhanf/vasst-dev $INSTALL/vasst-dev
 
+#if octave exists:
+if [ -e /etc/octave.conf ]
+then
+echo addpath\(genpath\(\'${PIPELINE_TOOL_DIR}/matlab\'\)\)\; >> /etc/octave.conf 
+fi
+
 
 PROFILE=~/.bashrc
 
