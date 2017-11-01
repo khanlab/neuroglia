@@ -3,13 +3,21 @@
 #run a pipeline job on the cluster
 #pipeline jobs take subjids as args
 
-if [ -n $SINGULARITY_IMG ]
+if [ -n "$SINGULARITY_IMG" ]
 then
 	echo "Using env: $SINGULARITY_IMG"
 else
 	echo "SINGULARITY_IMG not defined! exiting..."
 	exit -1
 fi
+
+if [ -n "$SINGULARITY_OPTS" ]
+then
+	echo "Using opts: $SINGULARITY_OPTS"
+else
+	echo "Warning: SINGULARITY_OPTS not defined!"
+fi
+
 
 if [ "$#" -lt 2 ]
 then 

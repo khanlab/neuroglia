@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -n $SINGULARITY_IMG ]
+if [ -n "$SINGULARITY_IMG" ]
 then
 	echo "Using env: $SINGULARITY_IMG"
 else
@@ -8,7 +8,7 @@ else
 	exit -1
 fi
 
-if [ -n $SINGULARITY_OPTS ]
+if [ -n "$SINGULARITY_OPTS" ]
 then
 	echo "Using opts: $SINGULARITY_OPTS"
 else
