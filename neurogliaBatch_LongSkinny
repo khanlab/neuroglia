@@ -63,7 +63,7 @@ fi
 
 scriptname=${pipeline_script##*/} #strip leading path
 
-job_dir=$output_dir/jobs/`date +%Y_%m_%d_%-I%p`_${scriptname}
+job_dir=$output_dir/jobs/${scriptname}_`date +%Y_%m_%d_%-I%p`
 mkdir -p $job_dir
 
 
