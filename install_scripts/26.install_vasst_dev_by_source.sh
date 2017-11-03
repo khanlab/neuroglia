@@ -11,6 +11,22 @@ fi
 INSTALL=$1
 mkdir -p $INSTALL
 
+
+#install MCR v92 (2017a) (dependency)
+TMP_DIR=/tmp/mcr
+MCR_DIR=`realpath $INSTALL/mcr/v92`
+mkdir -p $TMP_DIR $MCR_DIR
+
+curl -L --retry 5 http://ssd.mathworks.com/supportfiles/downloads/R2017a/deployment_files/R2017a/installers/glnxa64/MCR_R2017a_glnxa64_installer.zip > $TMP_DIR/install.zip
+pushd $TMP_DIR
+unzip install.zip
+./install -mode silent -agreeToLicense yes -destinationFolder $MCR_DIR
+popd
+
+rm -rf $TMP_DIR
+
+
+
 git clone https://github.com/akhanf/vasst-dev $INSTALL/vasst-dev
 
 #if octave exists:
