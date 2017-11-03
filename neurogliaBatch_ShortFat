@@ -21,8 +21,8 @@ fi
 
 if [ "$#" -lt 2 ]
 then 
-  echo "LongSkinny:  72hour, 1core, 4GB memory"
-  echo "Usage: $0 <name of pipeline script>  <subjid/list> <additional arguments ... if any> "
+  echo "ShortFat:  6hour, 32core, 128GB memory"
+  echo "Usage: $0 <name of pipeline script>  <subjid/list> <additional arguments ... if any ... to be placed before subjid> "
   exit 0
 fi
 
@@ -58,7 +58,7 @@ then
   echo "Quitting..."
   exit 0
 else
-  echo "Running Jobs... (with 30 sec interval between each submission)"
+  echo "Running Jobs... "
 
 fi
 
@@ -82,8 +82,8 @@ echo "#!/bin/bash" > $job
 echo cd `pwd` >> $job
 echo singularity exec $SINGULARITY_OPTS $SINGULARITY_IMG  $pipeline_script $add_args $subj >> $job
 
- echo sbatch -J $name  -D `pwd` --time=72:00:00 --cpus-per-task=1 --ntasks=1 --mem=4000 --account=rrg-akhanf --output=$out $job 
- sbatch -J $name  -D `pwd` --time=72:00:00 --cpus-per-task=1 --ntasks=1 --mem=4000 --account=rrg-akhanf --output=$out $job 
+ echo sbatch -J $name  -D `pwd` --time=6:00:00 --cpus-per-task=32 --ntasks=1 --mem=128000 --account=rrg-akhanf --output=$out $job 
+ sbatch -J $name  -D `pwd` --time=6:00:00 --cpus-per-task=32 --ntasks=1 --mem=128000 --account=rrg-akhanf --output=$out $job 
 
 done
 
