@@ -47,6 +47,7 @@ bash 00.install_basics_sudo.sh
 bash 03.install_anaconda2_nipype_dcmstack_by_binary.sh /opt
 bash 04.install_octave_sudo.sh 
 bash 10.install_afni_fsl_sudo.sh
+bash 12.install_c3d_by_binary.sh /opt
 bash 15.install_freesurfer_by_source.sh /opt
 bash 16.install_ants_by_binary.sh /opt
 bash 17.install_dcm2niix_by_binary.sh /opt
@@ -63,7 +64,6 @@ bash 30.install_dke_by_binary.sh /opt
 
 
 #bash 11.install_minc_by_deb_sudo.sh /opt
-#bash 12.install_c3d_by_binary.sh /opt
 #bash 13.install_itksnap_by_binary.sh /opt
 #bash 14.install_dcm4che_ubuntu.sh /opt
 #bash 18.install_elastix_by_binary.sh /opt
@@ -87,7 +87,8 @@ export PATH=/opt/anaconda2/bin/:$PATH
 
 #c3d
 export PATH=/opt/c3d/bin:$PATH
-export LD_LIBRARY_PATH=/opt/c3d/lib/c3d_gui-1.1.0:$LD_LIBRARY_PATH
+#leave out deps for c3d gui to avoid conflicts
+#export LD_LIBRARY_PATH=/opt/c3d/lib/c3d_gui-1.1.0:$LD_LIBRARY_PATH 
 
 #itksnap
 export PATH=/opt/itksnap/bin:$PATH

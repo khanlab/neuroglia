@@ -40,7 +40,8 @@ else
 	echo "" >> $PROFILE
 	echo "#C3D" >> $PROFILE
 	echo "export PATH=$C3D_DIR/bin:\$PATH" >> $PROFILE
-	echo "LD_LIBRARY_PATH=$C3D_DIR/lib/c3d_gui-1.1.0:\$LD_LIBRARY_PATH" >> $PROFILE
+#left out dep for c3d_gui to avoid potential conflicts
+#	echo "LD_LIBRARY_PATH=$C3D_DIR/lib/c3d_gui-1.1.0:\$LD_LIBRARY_PATH" >> $PROFILE
 fi
 
 #test installation
