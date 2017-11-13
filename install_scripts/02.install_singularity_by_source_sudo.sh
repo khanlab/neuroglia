@@ -17,7 +17,7 @@ if [ -d $S_DIR ]; then
 	rm -rf $S_DIR
 fi
 
-VERSION=2.3.2
+VERSION=2.4
 pushd /tmp
 wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
 tar xvf singularity-$VERSION.tar.gz

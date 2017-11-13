@@ -153,6 +153,15 @@ else
     echo 'FAIL'
 fi
 
+#test installation
+echo -n "testing dke(Diffusional Kurtosis Imaging) install: "
+singularity exec $IMAGE_FILE run_dke.sh  >/dev/null
+if [ $? -eq 0 ]; then
+	echo 'SUCCESS'
+else
+    echo 'FAIL'
+fi
+
 ## test dicom_retrieve
 #singularity exec -B /mnt/hgfs/data:data $IMAGE_FILE dicom_retrieve.py /data/7T_BIDS_patientID_list.txt /data/output/dicom/ UWO_USERNAME UWO_PASSWORD
 
