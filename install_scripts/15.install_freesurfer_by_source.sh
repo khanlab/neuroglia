@@ -38,6 +38,9 @@ tar -xvzf freesurfer-Linux-centos6_x86_64-stable-pub-v$VERSION.tar.gz -C $S_DIR 
     --exclude='freesurfer/lib/qt'
 rm freesurfer-Linux-centos6_x86_64-stable-pub-v$VERSION.tar.gz
 
+#get license
+curl -L --retry 5 https://www.dropbox.com/s/38gghuq2w7hl7pe/freesurfer_license -o $S_DIR/freesurfer/.license
+
 if [ -e $HOME/.profile ]; then #ubuntu
 	PROFILE=$HOME/.profile
 elif [ -e $HOME/.bash_profile ]; then #centos

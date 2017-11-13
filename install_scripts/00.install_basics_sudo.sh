@@ -34,3 +34,9 @@ apt-get install -y ocl-icd-opencl-dev
 
 #need when install minc
 apt-get install -y imagemagick
+
+#needed when install camino
+apt-get install -y openjdk-9-jdk-headless
+
+#needed when install niftyreg
+apt-get install -y cmake-curses-gui curl libpng16-dev zlib1g-dev

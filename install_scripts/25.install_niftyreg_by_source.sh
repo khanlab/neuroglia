@@ -22,12 +22,7 @@ NIFTY_SRC=$D_DIR/src
 NIFTY_DIR=$D_DIR
 
 
-apt-get update && apt-get install -qy \
-build-essential \
-cmake-curses-gui \
-curl \
-libpng12-dev \
-zlib1g-dev && \
+
 mkdir -p $NIFTY_SRC && \
   echo "Downloading http://sourceforge.net/projects/niftyreg/files/nifty_reg-${NIFTY_VER}/nifty_reg-${NIFTY_VER}.tar.gz/download" && \
   curl -L http://sourceforge.net/projects/niftyreg/files/nifty_reg-${NIFTY_VER}/nifty_reg-${NIFTY_VER}.tar.gz/download \
