@@ -32,7 +32,8 @@ mkdir -p $D_DIR
 #pip install https://github.com/moloney/dcmstack/archive/c12d27d2c802d75a33ad70110124500a83e851ee.zip
 
 cd $D_DIR
-wget https://raw.githubusercontent.com/nipy/heudiconv/master/bin/heudiconv
+#wget https://raw.githubusercontent.com/nipy/heudiconv/master/bin/heudiconv
+wget -O heudiconv https://www.dropbox.com/s/9w6dbyu1lr9dq42/heudiconv?dl=0
 chmod +x heudiconv
 cd
 
